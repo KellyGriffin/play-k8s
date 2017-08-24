@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: hello-nodejs
+    labels:
+        app: hello-nodejs
+spec:
+    containers:
+    - name: hello-nodejs
+      image: miguelgt/k8s-demo
+      ports:
+      - containerPort: 3000
