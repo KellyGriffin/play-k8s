@@ -8,5 +8,5 @@ spec:
         app: hello-nodejs
     ports:
     - port: 80
-      targetPort: hello-nodejs
+      targetPort: nodejs-port
       protocol: TCP
