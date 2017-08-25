@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: hello-nodejs
+spec:
+    replicas: 3
+    template:
+        metadata:
+            labels:
+                app: hello-nodejs
+        spec:
+            containers:
+            - name: hello-nodejs
+              image: miguelgt/k8s-demo:v2
+              ports:
+              - name: nodejs-port
+                containerPort: 3000
+              livenessProbe:
+                  httpGet:
+                      path: /
+                      port: nodejs-port
+                  initialDelaySeconds: 15
+                  timeoutSeconds: 30
+            nodeSelector:
+                hardware: high-spec
+
