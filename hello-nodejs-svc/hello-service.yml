@@ -7,6 +7,5 @@ spec:
     selector:
         app: hello-nodejs
     ports:
-    - port: 80
-      targetPort: nodejs-port
+    - port: 3000
       protocol: TCP

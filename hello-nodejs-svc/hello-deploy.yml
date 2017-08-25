@@ -14,3 +14,5 @@ spec:
               image: miguelgt/k8s-demo:v2
               ports:
               - containerPort: 3000
+            nodeSelector:
+                hardware: high-spec
