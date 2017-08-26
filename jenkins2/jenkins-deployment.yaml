@@ -11,9 +11,9 @@ spec:
         spec:
             containers:
             - name: jenkins
-              image: jenkins:2.60.1-alpine
+              image: jenkins:2.7.1
               ports:
-              - name: jenkins-ui
-                containerPort: 8080
-              - name: jenkins-config
-                containerPort: 50000
+              - containerPort: 8080
+                protocol: TCP
+              - containerPort: 50000
+                protocol: TCP
