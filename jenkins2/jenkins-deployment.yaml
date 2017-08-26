@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: jenkins-deployment
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: jenkins
+        spec:
+            containers:
+            - name: jenkins
+              image: jenkins:2.60.1-alpine
+              ports:
+              - name: jenkins-ui
+                containerPort: 8080
+              - name: jenkins-config
+                containerPort: 50000
