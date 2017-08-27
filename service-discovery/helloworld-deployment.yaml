@@ -18,15 +18,15 @@ spec:
                 containerPort: 3000
               env:
                 - name: MYSQL_HOST
-                  value: database-service
+                  value: mysql-db-service
                 - name: MYSQL_USER
                   value: root
-                - name: MYSQL_ROOT_PASSWORD
+                - name: MYSQL_PASSWORD
                   valueFrom:
                       secretKeyRef:
                           name: helloworld-secrets
                           key: rootPassword
-                - name: MYSQL_DATABAASE
+                - name: MYSQL_DATABASE
                   valueFrom:
                       secretKeyRef:
                           name: helloworld-secrets
