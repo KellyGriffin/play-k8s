@@ -1,23 +1,24 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-    name: hpa-example-deployment
+    name: hpa-example
 spec:
     replicas: 3
-    metadata:
-        name: hpa-example-pod
-        labels:
-            app: hpa-example
-    spec:
-        containers:
-        - name: hpa-example
-          image: gcr.io/google_containers/hpa-example
-          ports:
-          - name: http-port
-            containerPort: 80
-          resources:
-              requests:
-                  cpu: 200m
+    template:
+        metadata:
+            name: hpa-example
+            labels:
+                app: hpa-example
+        spec:
+            containers:
+            - name: hpa-example
+              image: gcr.io/google_containers/hpa-example
+              ports:
+              - name: http-port
+                containerPort: 80
+              resources:
+                  requests:
+                      cpu: 200m
 ---
 apiVersion: v1
 kind: Service
@@ -41,7 +42,7 @@ spec:
     scaleTargetRef:
         apiVersion: extensions/v1beta1
         kind: Deployment
-        name: hpa-example-deployment
+        name: hpa-example
     minReplicas: 1
     maxReplicas: 10
     targetCPUUtilizationPercentage: 50
