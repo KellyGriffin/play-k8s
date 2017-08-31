@@ -32,4 +32,17 @@ spec:
       nodePort: 31001
       targetPort: http-port
       protocol: TCP
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: hpa-example-autoscaler
+spec:
+    scaleTargetRef:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        name: hpa-example-deployment
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 50
 
