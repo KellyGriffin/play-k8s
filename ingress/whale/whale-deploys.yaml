@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: whale-ingress-a
+spec:
+    replicas: 1
+    template:
+        metadata:
+            name: whale-ingress-a
+            labels:
+                app: whale-ingress-a
+        spec:
+            containers:
+            - name: sayhey
+              image: jonbaier/httpwhalesay:0.1
+              command: ["node", "index.js", "whale type A, Here."]
+              ports:
+              - containerPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: whale-ingress-b
+spec:
+    replicas: 1
+    template:
+        metadata:
+            name: whale-ingress-b
+            labels:
+                app: whale-ingress-b
+        spec:
+            containers:
+            - name: sayhey
+              image: jonbaier/httpwhalesay:0.1
+              command: ["node", "index.js", "Hey man, It's whale b, just chillin!"]
+              ports:
+              - containerPort: 80
