@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: utility
+    namespace: test-ns
+spec:
+    containers:
+    - name: utility
+      image: debian:latest
+      command: 
+        - sleep
+        - "3600"
