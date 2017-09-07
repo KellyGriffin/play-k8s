@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: node-js-deploy
+    namespace: test
+    labels:
+        name: node-js-deploy
+spec:
+    type: LoadBalancer
+    selector:
+        name: node-js-deploy
+    sessionAffinity: ClientIP
+    ports:
+    - port: 80
