@@ -16,7 +16,7 @@ spec:
         spec:
             containers:
             - name: hue-learner
-              image: g1g1/hue-learn:v3.0
+              image: g1g1/hue-learn:v4.0
               resources:
                   requests:
                       cpu: 200m

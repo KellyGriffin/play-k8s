@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: hue-reminders-service
+    labels:
+        app: hue-reminders
+spec:
+    selector:
+        app: hue-reminders
+    ports:
+    - port: 80
+      protocol: TCP
