@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: hue-music
+    labels:
+        app: hue-music
+spec:
+    containers:
+    - name: hue-music
+      image: miguelgt/k8s-demo:v2
+      livenessProbe:
+          httpGet:
+              path: /
+              port: 3000
+              httpHeaders:
+              - name: X-Custom-Header
+                value: Awesome
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
