@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: hello-bro-deploy
+spec:
+    replicas: 2
+    template:
+        metadata:
+            labels:
+                app: hello-bro
+        spec:
+            containers:
+            - name: hello-bro
+              image: miguelgt/k8s-demo:v2
+              ports:
+              - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: hello-bro-svc
+spec:
+    type: LoadBalancer
+    selector:
+        app: hello-bro
+    ports:
+    - port: 3000
+      protocol: TCP
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: hello-bro-hpa
+    namespace: default
+spec:
+    maxReplicas: 10
+    minReplicas: 3
+    targetCPUUtilizationPercentage: 20
+    scaleTargetRef:
+        apiVersion: v1
+        kind: Deployment
+        name: hello-bro-deploy
