@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: google-proxy
+spec:
+    containers:
+    - name: centos
+      image: centos
+      command: ["/bin/sh", "-c", "while : ;do curl -L http://google-proxy:80/; done"]
