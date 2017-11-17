@@ -30,3 +30,17 @@ spec:
               env:
               - name: REDIS_HOST
                 value: lcredis-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: kiosk-example-service
+spec:
+    type: NodePort
+    selector:
+        tier: fronted
+    ports:
+    - name: tcp5000
+      port: 80
+      targetPort: 5000
+      protocol: TCP
