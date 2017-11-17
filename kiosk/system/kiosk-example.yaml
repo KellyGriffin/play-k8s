@@ -29,7 +29,7 @@ spec:
               - containerPort: 5000
               env:
               - name: REDIS_HOST
-                value: lcredis-service
+                value: lcredis-service.kiosk
 ---
 apiVersion: v1
 kind: Service

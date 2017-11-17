@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+    name: recorder-example
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            tier: backend
+            version: "3"
+    minReadySeconds: 3
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+    template:
+        metadata:
+            labels:
+                tier: backend
+                version: "3"
+            annotations:
+                maintainer: miguel
+        spec:
+            containers:
+            - name: recorder-example
+              image: devopswithkubernetes/recorder-example
+              env:
+              - name: REDIS_HOST
+                value: lcredis-service
+              - name: MYSQL_HOST
+                value: lmysql-service.kiosk
+              - name: MYSQL_USER
+                value: root
+              - name: MYSQL_ROOT_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: mysql-root
+                        key: password
