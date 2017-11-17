@@ -24,7 +24,7 @@ spec:
         spec:
             containers:
             - name: kiosk-example
-              image: devopswkubernetes/kiosk-example
+              image: devopswithkubernetes/kiosk-example
               ports:
               - containerPort: 5000
               env:
