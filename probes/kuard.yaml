@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
+      kuard'
+  creationTimestamp: 2018-03-15T14:53:15Z
+  labels:
+    run: kuard
+  name: kuard
+  namespace: default
+  resourceVersion: "629060"
+  selfLink: /api/v1/namespaces/default/pods/kuard
+  uid: 972e87ce-2860-11e8-98e9-42010a8e0067
+spec:
+  containers:
+  - image: gcr.io/kuar-demo/kuard-amd64:1
+    imagePullPolicy: IfNotPresent
+    name: kuard
+    resources:
+      requests:
+        cpu: 100m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-64f8l
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: gke-monitory-system-default-pool-95d7a54a-j8tx
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-64f8l
+    secret:
+      defaultMode: 420
+      secretName: default-token-64f8l
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2018-03-15T14:53:15Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2018-03-15T14:53:19Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2018-03-15T14:53:15Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://33c7ebee1290d55c70b06d96be846a1dca995a20d90ff9256842016b073a424f
+    image: gcr.io/kuar-demo/kuard-amd64:1
+    imageID: docker-pullable://gcr.io/kuar-demo/kuard-amd64@sha256:3e75660dfe00ba63d0e6b5db2985a7ed9c07c3e115faba291f899b05db0acd91
+    lastState: {}
+    name: kuard
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2018-03-15T14:53:18Z
+  hostIP: 10.142.0.3
+  phase: Running
+  podIP: 10.0.3.36
+  qosClass: Burstable
+  startTime: 2018-03-15T14:53:15Z

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: kuard-deploy
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: kuard
+    template:
+        metadata:
+            labels:
+                app: kuard
+        spec:
+          containers:
+          - image: gcr.io/kuar-demo/kuard-amd64:2
+            imagePullPolicy: IfNotPresent
+            name: kuard
+            livenessProbe:
+                httpGet:
+                    path: /healthz
+                    port: 8080
+                initialDelaySeconds: 3
+                periodSeconds: 3
+                failureThreshold: 3
+                successThreshold: 1
+            readinessProbe:
+                httpGet:
+                    path: /healthz
+                    port: 8080
+                initialDelaySeconds: 3
+                periodSeconds: 3
+                failureThreshold: 3
+                successThreshold: 1
+          dnsPolicy: ClusterFirst
+          restartPolicy: Always
