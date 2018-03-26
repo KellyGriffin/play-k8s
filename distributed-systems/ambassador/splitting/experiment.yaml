@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: experiment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: experiment
+  template:
+    metadata:
+      labels:
+        app: experiment
+    spec:
+      containers:
+      - name: experiment
+        image: miguelgt/foo:60e381d25d9ee885d09edb9d617b1e26d4248df1
+        ports:
+        - name: http
+          containerPort: 8080
+---
+apiVersion: v1
+kind: Service  
+metadata:
+  name: experiment
+spec:
+  ports:
+  - name: http
+    targetPort: 8080
+    port: 80
+    protocol: TCP
+  selector:
+    app: experiment
