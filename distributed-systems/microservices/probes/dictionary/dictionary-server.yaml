@@ -1,16 +1,16 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: dictonary-server
+  name: dictionary-server
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: dictonary
+      app: dictionary
   template:
     metadata:
       labels:
-        app: dictonary
+        app: dictionary
     spec:
       containers:
       - name: server
