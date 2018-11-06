@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sidecar
+spec:
+  containers:
+  - name: server
+    image: httpd
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: source
+      mountPath: /usr/local/apache2/htdocs/
+  - name: sync
+    image: alpine/git
+    command:
+    - "sh"
+    - "-c"
+    - "git clone https://github.com/miguellgt/2048 . && watch -n 30 git pull"
+    workingDir: /source
+    volumeMounts:
+    - name: source
+      mountPath: /source
+  volumes:
+  - name: source
+    emptyDir: {}
+
