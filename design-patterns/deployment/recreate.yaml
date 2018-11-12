@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: recreate
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.11
+        ports:
+        - name: http
+          containerPort: 80
+
